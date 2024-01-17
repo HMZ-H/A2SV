@@ -3,16 +3,16 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        for i in range(1, len(nums)):
-            j = i -1
-            curr_val = nums[i]
-            while j >= 0 and curr_val > nums[j]:
-                nums[j+1] = nums[j]
-                j-=1
-            j+=1
+        for right in range(1, len(nums)):
+            left = right -1
+            curr_val = nums[right]
+            while left >= 0 and curr_val > nums[left]:
+                nums[left+1] = nums[left]
+                left-=1
+            left+=1
 
-            if j != i:
-                nums[j] = curr_val
+            if left != right:
+                nums[left] = curr_val
         return nums.reverse()
 
 

@@ -1,18 +1,23 @@
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        prefix_sum = {0: 1}  
-        count = 0  
-        curr_sum = 0 
+        prefixSum = [0]
+        for i in range(len(nums)):
+            prefixSum.append(prefixSum[i] + nums[i])
+        # print(prefixSum)
+
+        dic = defaultdict(int) #{0: 1} 
+        dic[0] = 1
+
+        res = 0
+        for i in range(1, len(prefixSum)):
+            comulative = prefixSum[i] - k
+            if comulative in dic:
+                res += dic[comulative]
         
-        for num in nums:
-            curr_sum += num
-            complement = curr_sum - k
-            if complement in prefix_sum:
-                count += prefix_sum[complement] 
-            
-            prefix_sum[curr_sum] = prefix_sum.get(curr_sum, 0) + 1 
-            
-        return count
+            dic[prefixSum[i]] = dic.get(prefixSum[i], 0) + 1
+        
+        return res
+        
         
        
 
